@@ -25,3 +25,10 @@ endif
 
 SFLAGS += -mthumb -march=armv7e-m -mfloat-abi=hard -mcpu=cortex-m4 -mfpu=fpv4-sp-d16
 LDFLAGS += $(SFLAGS) -lgcc -Wl,-T,$(LDSCRIPT)
+
+# Work around command-line length limit with MSYS2
+%.$(EXE):
+	$(Q) echo $^ > $@.objs
+	@echo "LD      $(@:$(BUILD_DIR)/%=%)"
+	$(Q) $(LD) @$@.objs $(LDFLAGS) -o $@
+	$(Q) rm $@.objs
