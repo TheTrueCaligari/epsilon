@@ -36,9 +36,10 @@ def mandelbrot(N_iteration):
         z = z*z+c
 # Choose the color of the dot from the Mandelbrot sequence
       rgb = int(255*i/N_iteration)
-      col = kandinsky.color(int(rgb),int(rgb*0.75),int(rgb*0.25))
+      col = kandinsky.color(int(rgb*0.422),int(rgb*0.629),int(rgb))
 # Draw a pixel colored in 'col' at position (x,y)
-      kandinsky.set_pixel(x,y,col))");
+      kandinsky.set_pixel(x,y,col)
+mandelbrot(100))");
 
 constexpr ScriptTemplate polynomialScriptTemplate("polynomial.py", "\x01" R"(from math import *
 # roots(a,b,c) computes the solutions of the equation a*x**2+b*x+c=0
