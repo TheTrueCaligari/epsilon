@@ -4,15 +4,15 @@
 
 %.bin: %.$(EXE)
 	@echo "OBJCOPY $@"
-#	$(Q) $(OBJCOPY) -O binary $< $@
-	$(Q) $(OBJCOPY) -O binary $(BUILD_DIR)/$< $(BUILD_DIR)/$@
+	$(Q) $(OBJCOPY) -O binary $< $@
+#	$(Q) $(OBJCOPY) -O binary $(BUILD_DIR)/$< $(BUILD_DIR)/$@
 # We pad the device binary files because there was a bug in an older version of
 # the dfu code, and it did not upload properly a binary of length non-multiple
 # of 32 bits.
 #TODO: We over-pad here, pad with the the needed amount of bytes only.
 	@echo "Padding $@"
-#	$(Q) printf "\xFF\xFF\xFF\xFF" >> $@
-	$(Q) printf "\xFF\xFF\xFF\xFF" >> $(BUILD_DIR)/$@
+	$(Q) printf "\xFF\xFF\xFF\xFF" >> $@
+#	$(Q) printf "\xFF\xFF\xFF\xFF" >> $(BUILD_DIR)/$@
 
 .PHONY: %_size
 %_size: %.$(EXE)
